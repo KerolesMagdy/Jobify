@@ -1,0 +1,23 @@
+[
+  {"id": 1, "name": "Postman"},
+  {"id": 2, "name": "Intellij Idea"},
+  {"id": 3, "name": "xampp"},
+  {"id": 4, "name": "NetBeans"},
+  {"id": 5, "name": "CSS"},
+  {"id": 6, "name": "JAVA"},
+  {"id": 7, "name": "Spring Boot"},
+  {"id": 8, "name": "Kotlin"},
+  {"id": 9, "name": "HTML"},
+  {"id": 10, "name": "XML"},
+  {"id": 11, "name": "Json"},
+  {"id": 12, "name": "C++"},
+  {"id": 13, "name": "Python"},
+  {"id": 14, "name": "C"},
+  {"id": 15, "name": "AI"},
+  {"id": 16, "name": "Database"},
+  {"id": 17, "name": "SQL"},
+  {"id": 18, "name": "MYSQL"},
+  {"id": 19, "name": "SQL Server"},
+  {"id": 20, "name": "NoSQL"},
+  {"id": 21, "name": "MongoDB"}
+]
