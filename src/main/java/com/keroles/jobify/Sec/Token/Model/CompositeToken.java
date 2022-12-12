@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompositeToken {
-    private String accessToken;
-    private String refreshToken;
+    private char[] accessToken;
+    private char[] refreshToken;
 }

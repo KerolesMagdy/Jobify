@@ -2,7 +2,7 @@ package com.keroles.jobify.Service.Implementation;
 
 import com.keroles.jobify.Exception.Exceptions.Global.GlobalObjectNotFoundException;
 import com.keroles.jobify.Exception.Exceptions.User.UserOpNotAuthException;
-import com.keroles.jobify.Mail.MailServiceImpl;
+import com.keroles.jobify.Mail.MailService;
 import com.keroles.jobify.Mail.Model.SimpleMail;
 import com.keroles.jobify.Model.Entity.UserOtp;
 import com.keroles.jobify.Repository.UserOtpRepo;
@@ -27,12 +27,11 @@ public class UserOtpService implements UserOtpServiceOp {
     @Autowired
     private UsersRepo usersRepo;
     @Autowired
-    MailServiceImpl mailService;
+    MailService mailService;
     @Autowired
     Environment environment;
 
-    @Override
-    public int generateOtp(String email) {
+    private int generateOtp(char[] email) {
         Otp otp=otpUtil.generateRandomOtp();
         UserOtp userOtp=getUserOtp(email);
         if(userOtp!=null) {
@@ -52,29 +51,38 @@ public class UserOtpService implements UserOtpServiceOp {
     }
     @Transactional
     @Override
-    public String sendOtpToUserByEmail(String mailTo) {
-        if (usersRepo.findByEmail(mailTo)==null)
-            throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.not_found"));
-        if (otpUtil.isOtpExpired(userOtpRepo.findByEmail(mailTo).getExpired()))
-         return "user previous otp still not expired";
-        else if (mailService.sendSimpleMail(
-                SimpleMail
-                        .builder()
-                        .recipient(mailTo)
-                        .msgBody("your otp is : "+generateOtp(mailTo))
-                        .subject("Verification Code").build())
+    public String sendOtpToVerifyEmail(char[] mailTo, char[]subject, char[]path) {
+        if (mailService.sendSimpleMail(
+                mailTo,
+                subject,
+                ("verification link is : "+path+"?email="+mailTo+"&otp="+generateOtp(mailTo)).toCharArray())
         )
             return "Mail sent Successfully check your mail";
         else return "Something went wrong try again late";
     }
+
     @Override
-    public UserOtp getUserOtp(String email) {
+    public String refreshOtpToEmail(char[] mailTo) {
+        if (mailService.sendSimpleMail(
+                mailTo,
+                "otp : ".toCharArray(),
+                "your Verification Code".toCharArray())
+        )
+            return "Mail sent Successfully check your mail";
+        else return "Something went wrong try again late";
+
+    }
+
+    @Override
+    public UserOtp getUserOtp(char[] email) {
         UserOtp userOtp= userOtpRepo.findByEmail(email);
         if (userOtp==null)
             return null;
         return userOtp;
-    }    @Override
-    public UserOtp getCredentialUserOtp(String email) {
+    }
+
+    @Override
+    public UserOtp getCredentialUserOtp(char[] email) {
         if (!checkIdentityAuthOp(email))
             throw new UserOpNotAuthException();
         UserOtp userOtp= userOtpRepo.findByEmail(email);
@@ -84,7 +92,7 @@ public class UserOtpService implements UserOtpServiceOp {
     }
 
 
-    boolean checkIdentityAuthOp(String email){
+    private boolean checkIdentityAuthOp(char[] email){
         return SecurityContextHolder.getContext().getAuthentication().getName().equals(email);
     }
 }

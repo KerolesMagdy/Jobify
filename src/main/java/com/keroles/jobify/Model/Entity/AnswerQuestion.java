@@ -18,13 +18,12 @@ public class AnswerQuestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
-    @JoinColumn(name = "question_id")
-    @NotNull
+    @NotNull(message = "The question for this answer must not be null")
     private Question question;
-    @Nullable
+    @NotNull(message = "The answer for the question must not be null")
     private String answer;
     @ManyToOne
     @JoinColumn(name = "answer_form_id")
-    @JsonBackReference(value = "AnswerForm-answerQuestion")
+    @JsonBackReference(value = "answerForm-answerQuestion")
     private AnswerForm answerForm;
 }

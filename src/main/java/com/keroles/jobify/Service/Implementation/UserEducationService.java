@@ -27,14 +27,14 @@ public class UserEducationService implements UserEducationServicecOp {
 
     @Transactional
     @Override
-    public UserEducationDto getByEmail(String email) {
+    public UserEducationDto getByEmail(char[] email) {
         Optional<UserEducation> userEducation = userEducationRepo.findByEmail(email);
         if (!userEducation.isPresent())
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.education.not_found"));
         return userEducationMapper.mapToDto(userEducation.get());
     }
     @Override
-    public String updateCurrentDegreeLevel(long level_id, String email) {
+    public String updateCurrentDegreeLevel(long level_id, char[] email) {
         DegreeLevel level=new DegreeLevel(level_id,null);
         if (userEducationRepo.updateCurrentLevel(level,email)==0) {
             userEducationRepo.save(new UserEducation(null,email,level,null,null,null));
@@ -45,7 +45,7 @@ public class UserEducationService implements UserEducationServicecOp {
     }
 
     @Override
-    public String updateEmail(String old_email,String new_email) {
+    public String updateEmail(char[] old_email,char[] new_email) {
         if (userEducationRepo.updateEmail( old_email, new_email)==0)
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.education.not_found"));
         else
@@ -54,7 +54,7 @@ public class UserEducationService implements UserEducationServicecOp {
 
     @Transactional
     @Override
-    public String deleteUserEducation(String email) {
+    public String deleteUserEducation(char[] email) {
         Optional<UserEducation> retrievedEducation = userEducationRepo.findByEmail(email);
         if (!retrievedEducation.isPresent())
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.education.not_found"));

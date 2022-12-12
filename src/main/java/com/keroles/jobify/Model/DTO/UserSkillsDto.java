@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserSkillsDto {
     private Long id;
-    private String email;
+    private char[] email;
     private List<ExperienceSkillDto> experienceSkills;
     private List<ExperienceLanguageDto>  experienceLanguages;
 }

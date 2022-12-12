@@ -6,7 +6,7 @@ public interface UserGeneralInfoServiceOp {
 
     UserGeneralInfo save(UserGeneralInfo userInfo);
     UserGeneralInfo update(UserGeneralInfo userInfo);
-    UserGeneralInfo getInfoCredentialByEmail(String email);
-    UserGeneralInfo getByEmail(String email);
-    int remove(String email);
+    UserGeneralInfo getInfoCredentialByEmail(char[] email);
+    UserGeneralInfo getByEmail(char[] email);
+    int remove(char[] email);
 }

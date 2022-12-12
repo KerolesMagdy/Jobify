@@ -15,8 +15,8 @@ import java.util.Date;
 public class UserDtoWithoutToken {
 
     private Long id;
-    private String fullName;
-    private String email;
+    private char[] fullName;
+    private char[] email;
     private boolean enabled;
     private boolean expired;
     private boolean locked;

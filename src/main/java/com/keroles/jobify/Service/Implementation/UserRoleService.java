@@ -18,7 +18,7 @@ public class UserRoleService implements UserRoleServiceOp {
     }
 
     @Override
-    public UserRole getByRoleName(String name) {
+    public UserRole getByRoleName(char[] name) {
         return userRoleRepo.findByRoleName(name);
     }
 

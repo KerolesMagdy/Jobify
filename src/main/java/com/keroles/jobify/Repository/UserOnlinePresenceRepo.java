@@ -11,13 +11,13 @@ import java.util.Optional;
 
 @Repository
 public interface UserOnlinePresenceRepo extends JpaRepository<UserOnlinePresence,Long> {
-    Optional<UserOnlinePresence> findByEmail(String email);
+    Optional<UserOnlinePresence> findByEmail(char[] email);
 
     @Transactional
     @Modifying
     @Query("update UserOnlinePresence o set o.email=:new_email where o.email=:old_email")
-    int updateEmail(String old_email, String new_email);
+    int updateEmail(char[] old_email, char[] new_email);
 
     @Transactional
-    int deleteByEmail(String email);
+    int deleteByEmail(char[] email);
 }

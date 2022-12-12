@@ -17,15 +17,16 @@ import java.util.List;
 @NoArgsConstructor
 public class TokenModel {
 
-    private String username;
-    private List<String> roles=new ArrayList<>();
+    private char[] username;
+    private List<char[]> roles=new ArrayList<>();
     private Date createdAt;
     private Date expirationDate;
+    private String usertype;
 
     public Collection<SimpleGrantedAuthority> getAuthority(){
         Collection<SimpleGrantedAuthority> authorities=new ArrayList<>();
         if (roles!=null)
-            for (String userRole : roles) authorities.add(new SimpleGrantedAuthority(userRole));
+            for (char[] userRole : roles) authorities.add(new SimpleGrantedAuthority(String.valueOf(userRole)));
         return authorities;
     }
 

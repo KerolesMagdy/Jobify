@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface UserGeneralInfoRepo extends JpaRepository<UserGeneralInfo,Long> {
 
-    Optional<UserGeneralInfo> findByEmail(String email);
-    int removeByEmail(String Email);
+    Optional<UserGeneralInfo> findByEmail(char[] email);
+    int removeByEmail(char[] Email);
 
 }

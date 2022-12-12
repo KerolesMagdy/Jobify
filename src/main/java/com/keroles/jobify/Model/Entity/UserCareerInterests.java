@@ -26,7 +26,7 @@ public class UserCareerInterests {
     @Email(message = "Not valid email")
     @NotNull(message = "You must write your email")
     @Column(unique = true)
-    private String email;
+    private char[] email;
     @OneToOne
     @JoinColumn(name = "career_level_id")
     private CareerLevel careerLevel;

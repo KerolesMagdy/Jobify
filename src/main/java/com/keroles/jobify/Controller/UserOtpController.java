@@ -14,13 +14,13 @@ public class UserOtpController {
     private UserOtpService userOtpService;
 
     @RequestMapping(value = "/otp",method = RequestMethod.POST)
-    public ResponseEntity<UserOtp> getUserOtp(@RequestParam @NotBlank String email){
+    public ResponseEntity<UserOtp> getUserOtp(@RequestParam @NotBlank char[] email){
         return ResponseEntity.ok().body(userOtpService.getCredentialUserOtp(email));
     }
 
     @RequestMapping(value = "/otp/reset",method = RequestMethod.POST)
-    public ResponseEntity<String> updateUserOtp(@RequestParam @NotBlank String email){
-        return ResponseEntity.ok().body(userOtpService.sendOtpToUserByEmail(email));
+    public ResponseEntity<String> updateOtp(@RequestParam @NotBlank char[] email){
+        return ResponseEntity.ok().body(userOtpService.refreshOtpToEmail(email));
     }
 
 }

@@ -30,7 +30,7 @@ public class UserExperienceService implements UserExperienceServiceOp {
     }
 
     @Override
-    public UserExperienceDto getByEmail(String email) {
+    public UserExperienceDto getByEmail(char[] email) {
         Optional<UserExperience> userExperience=userExperienceRepo.findByEmail(email);
         if (!userExperience.isPresent())
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.experience.not_found"));
@@ -39,7 +39,7 @@ public class UserExperienceService implements UserExperienceServiceOp {
 
     @Transactional
     @Override
-    public String updateUserUserExperienceYears(String email, int years) {
+    public String updateUserUserExperienceYears(char[] email, int years) {
         Optional<UserExperience> experience=userExperienceRepo.findByEmail(email);
         if (!experience.isPresent()){
             if(userExperienceRepo.save(new UserExperience(null,email,years,new ArrayList<>()))==null)
@@ -65,7 +65,7 @@ public class UserExperienceService implements UserExperienceServiceOp {
     }
 
     @Override
-    public void deleteByEmail(String email) {
+    public void deleteByEmail(char[] email) {
         userExperienceRepo.removeByEmail(email);
     }
 

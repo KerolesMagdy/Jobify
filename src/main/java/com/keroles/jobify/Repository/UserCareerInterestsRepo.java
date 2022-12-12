@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface UserCareerInterestsRepo extends JpaRepository<UserCareerInterests,Long> {
-    UserCareerInterests findByEmail(String email);
+    UserCareerInterests findByEmail(char[] email);
     @Transactional
-    int removeByEmail(String email);
+    int removeByEmail(char[] email);
 
 }

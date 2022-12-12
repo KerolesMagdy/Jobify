@@ -15,20 +15,20 @@ public class UserSkillsController {
     private UserSkillService userSkillService;
 
     @RequestMapping(value = "/user-skills/{email}",method = RequestMethod.GET)
-    ResponseEntity<UserSkillsDto> get(@PathVariable String email){
+    ResponseEntity<UserSkillsDto> get(@PathVariable char[] email){
         return ResponseEntity.ok().body(userSkillService.getByEmail(email));
     }
 
     @RequestMapping(value = "/user-skills/{email}",method = RequestMethod.POST)
-    ResponseEntity<UserSkillsDto> save(@PathVariable String email){
+    ResponseEntity<UserSkillsDto> save(@PathVariable char[] email){
         return ResponseEntity.ok().body(userSkillService.save(email));
     }
     @RequestMapping(value = "/user-skills/update/e",method = RequestMethod.PUT)
-    ResponseEntity<String> updateUserSkillsEmail(@RequestParam String old_email,@RequestParam String new_email){
+    ResponseEntity<String> updateUserSkillsEmail(@RequestParam char[] old_email,@RequestParam char[] new_email){
         return ResponseEntity.ok().body(userSkillService.updateEmail(old_email,new_email));
     }
     @RequestMapping(value = "/user-skills/{email}",method = RequestMethod.DELETE)
-    ResponseEntity<String> delete(@PathVariable String email){
+    ResponseEntity<String> delete(@PathVariable char[] email){
         return ResponseEntity.ok().body(userSkillService.delete(email));
     }
 

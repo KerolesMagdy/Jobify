@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,11 +17,7 @@ public class AnswerForm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "answerForm")
-    @JsonManagedReference(value = "QuestionForm-question")
-    private Set<AnswerQuestion> answerQuestions;
-    @ManyToOne
-    @JoinColumn(name = "job_apply_id")
-    @JsonBackReference(value = "jobApply-answerform")
-    private JobApply jobApply;
+    @OneToMany(mappedBy = "answerForm",cascade = CascadeType.REMOVE)
+    @JsonManagedReference(value = "answerForm-answerQuestion")
+    private List<AnswerQuestion> answerQuestions;
 }

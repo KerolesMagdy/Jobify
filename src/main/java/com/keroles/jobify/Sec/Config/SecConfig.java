@@ -1,16 +1,22 @@
 package com.keroles.jobify.Sec.Config;
 
-import com.keroles.jobify.Sec.AuthFilter.TokenAuthFilter;
+//import com.keroles.jobify.Sec.AuthFilter.EmployerAuthFilter;
+import com.keroles.jobify.Sec.AuthFilter.EmployerAuthFilter;
+import com.keroles.jobify.Sec.AuthFilter.TokenEmployerAuthFilter;
+import com.keroles.jobify.Sec.AuthFilter.TokenUserAuthFilter;
 import com.keroles.jobify.Sec.AuthFilter.UserPassAuthFilter;
 import com.keroles.jobify.Sec.ApiPath.AuthPath;
 import com.keroles.jobify.Sec.ApiPath.AuthPathPrivilege;
+//import com.keroles.jobify.Sec.Provider.EmployerAuthProvider;
+import com.keroles.jobify.Sec.Provider.EmployerAuthProvider;
 import com.keroles.jobify.Sec.Provider.UserPassAuthProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,6 +24,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
+import java.util.List;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -31,9 +39,15 @@ public class SecConfig {
     @Autowired
     UserPassAuthProvider userPassAuthProvider;
     @Autowired
+    EmployerAuthProvider employerAuthProvider;
+    @Autowired
     UserPassAuthFilter userPassAuthFilter;
     @Autowired
-    TokenAuthFilter tokenAuthFilter;
+    EmployerAuthFilter employerAuthFilter;
+    @Autowired
+    TokenUserAuthFilter tokenUserAuthFilter;
+    @Autowired
+    TokenEmployerAuthFilter tokenEmployerAuthFilter;
     @Autowired
     AuthPathPrivilege userPrivilege;
     @Autowired
@@ -51,8 +65,11 @@ public class SecConfig {
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(STATELESS)
                 .and().authenticationProvider(userPassAuthProvider)
+                .authenticationProvider(employerAuthProvider)
                 .addFilterAt(userPassAuthFilter , BasicAuthenticationFilter.class)
-                .addFilterAfter(tokenAuthFilter , BasicAuthenticationFilter.class)
+                .addFilterAfter(employerAuthFilter , UserPassAuthFilter.class)
+                .addFilterAfter(tokenUserAuthFilter , EmployerAuthFilter.class)
+                .addFilterAfter(tokenEmployerAuthFilter , TokenUserAuthFilter.class)
         ;
 //        http.formLogin().failureHandler(customAuthenticationFailureHandler)
 //                .and().exceptionHandling().accessDeniedHandler(customAccessDeniedHandler);
@@ -60,10 +77,6 @@ public class SecConfig {
         return http.build();
     }
 
-//    @Bean
-//    public CustomUsernamePasswordAuthFilter getCustomUsernamePasswordAuthFilter(){
-//        return new CustomUsernamePasswordAuthFilter();
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -71,15 +84,13 @@ public class SecConfig {
     }
 
 //    @Bean
-//    public AuthenticationManager authenticationManager(AuthenticationManagerBuilder builder) throws Exception {
-//        return builder.userDetailsService(userDetailsService)
-//                .passwordEncoder(passwordEncoder())
-//                .and()
-//                .build();
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//        return authenticationConfiguration.getAuthenticationManager();
 //    }
+
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(List<AuthenticationProvider> myAuthenticationProviders) {
+        return new ProviderManager(myAuthenticationProviders);
     }
 
 }

@@ -47,7 +47,7 @@ public class UserGeneralInfoService implements UserGeneralInfoServiceOp {
     }
 
     @Override
-    public UserGeneralInfo getInfoCredentialByEmail(String email) {
+    public UserGeneralInfo getInfoCredentialByEmail(char[] email) {
 
         Optional<UserGeneralInfo> userGeneralInfo=userGeneralInfoRepo.findByEmail(email);
         if(!userGeneralInfo.isPresent())
@@ -56,7 +56,7 @@ public class UserGeneralInfoService implements UserGeneralInfoServiceOp {
     }
 
     @Override
-    public UserGeneralInfo getByEmail(String email) {
+    public UserGeneralInfo getByEmail(char[] email) {
         Optional<UserGeneralInfo> userGeneralInfo=userGeneralInfoRepo.findByEmail(email);
         if(!userGeneralInfo.isPresent())
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.general_info.not_found"));
@@ -65,7 +65,7 @@ public class UserGeneralInfoService implements UserGeneralInfoServiceOp {
 
     @Transactional
     @Override
-    public int remove(String email) {
+    public int remove(char[] email) {
         return userGeneralInfoRepo.removeByEmail(email);
     }
 

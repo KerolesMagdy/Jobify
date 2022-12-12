@@ -26,7 +26,7 @@ public class UserOnlinePresenceService implements UserOnlinePresenceOP {
     private Environment environment;
 
     @Override
-    public UserOnlinePresenceDto getByEmail(String email) {
+    public UserOnlinePresenceDto getByEmail(char[] email) {
         Optional<UserOnlinePresence> userOnlinePresence=userOnlinePresenceRepo.findByEmail(email);
         log.error("11111111111111111111111111111111");
         if (!userOnlinePresence.isPresent())
@@ -36,7 +36,7 @@ public class UserOnlinePresenceService implements UserOnlinePresenceOP {
     }
 
     @Override
-    public UserOnlinePresenceDto save(String email) {
+    public UserOnlinePresenceDto save(char[] email) {
         Optional<UserOnlinePresence> userOnlinePresence=userOnlinePresenceRepo.findByEmail(email);
         if (userOnlinePresence.isPresent())
             throw new GlobalObjectFoundException(environment.getProperty("validate.message.user.social_link.found"));
@@ -44,7 +44,7 @@ public class UserOnlinePresenceService implements UserOnlinePresenceOP {
     }
 
     @Override
-    public String updateEmail(String oldEmail, String newEmail) {
+    public String updateEmail(char[] oldEmail, char[] newEmail) {
         Optional<UserOnlinePresence> userOnlinePresence=userOnlinePresenceRepo.findByEmail(oldEmail);
         if (!userOnlinePresence.isPresent())
             throw new GlobalObjectFoundException(environment.getProperty("validate.message.user.social_link.not_found"));
@@ -54,7 +54,7 @@ public class UserOnlinePresenceService implements UserOnlinePresenceOP {
     }
 
     @Override
-    public String delete(String email) {
+    public String delete(char[] email) {
         Optional<UserOnlinePresence> userOnlinePresence=userOnlinePresenceRepo.findByEmail(email);
         if (!userOnlinePresence.isPresent())
             throw new GlobalObjectFoundException(environment.getProperty("validate.message.user.social_link.not_found"));

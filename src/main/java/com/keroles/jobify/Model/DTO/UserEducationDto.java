@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UserEducationDto {
     private Long id;
-    private String email;
+    private char[] email;
     private DegreeLevel currentDegreeLevel;
     private List<DegreeDto> degrees;
     private List<CertificateDto> certificates;

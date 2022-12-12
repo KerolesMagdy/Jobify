@@ -12,11 +12,11 @@ public class UserExperienceController {
     @Autowired
     private UserExperienceService userExperienceService;
     @RequestMapping(value = "/user-experience/{email}",method = RequestMethod.GET)
-    public ResponseEntity<UserExperienceDto> getUserExperience(@PathVariable String email){
+    public ResponseEntity<UserExperienceDto> getUserExperience(@PathVariable char[] email){
         return ResponseEntity.ok().body(userExperienceService.getByEmail(email));
     }
     @RequestMapping(value = "/user-experience",method = RequestMethod.PUT)
-    public ResponseEntity<String> getUserExperience(@RequestParam String email,@RequestParam int years){
+    public ResponseEntity<String> getUserExperience(@RequestParam char[] email,@RequestParam int years){
         return ResponseEntity.ok().body(userExperienceService.updateUserUserExperienceYears(email,years));
     }
     @RequestMapping(value = "/user-experience/{id}",method = RequestMethod.DELETE)

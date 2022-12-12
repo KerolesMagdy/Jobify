@@ -28,13 +28,13 @@ public class UserGeneralInfo {
     private Long id;
     @Email(message = "email not valid")
     @Column(unique = true)
-    private String email;
+    private char[] email;
     @NotBlank(message = "first name is empty")
-    private String firstName;
+    private char[] firstName;
     @NotBlank(message = "middle name is empty")
-    private String middleName;
+    private char[] middleName;
     @NotBlank(message = "last name is empty")
-    private String lastName;
+    private char[] lastName;
     @NotNull(message = "date is empty")
     @JsonFormat(pattern = "yyyy-mm-dd HH:MM:SS")
     private Date Birthdate;

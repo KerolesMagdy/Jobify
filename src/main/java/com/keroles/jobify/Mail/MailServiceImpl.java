@@ -23,9 +23,9 @@ public class MailServiceImpl implements MailServiceOp {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(sender);
-            message.setTo(details.getRecipient());
+            message.setTo(String.valueOf(details.getRecipient()));
             message.setSubject(details.getSubject());
-            message.setText(details.getMsgBody());
+            message.setText(String.valueOf(details.getMsgBody()));
             emailSender.send(message);
         }catch (MailAuthenticationException exception){
             throw new MailAuthException();

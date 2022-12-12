@@ -24,7 +24,7 @@ public class UserEducation {
     private Long id;
     @Email
     @NotNull(message = "The given email must not be null")
-    private String email;
+    private char[] email;
     @OneToOne
     @JoinColumn(name = "degree_level_id")
     @NotNull(message = "The given current degree level must not be null")

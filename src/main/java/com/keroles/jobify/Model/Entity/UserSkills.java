@@ -22,7 +22,7 @@ public class UserSkills {
     private Long id;
     @Email
     @Column(unique = true)
-    private String email;
+    private char[] email;
     @OneToMany(fetch=FetchType.LAZY, mappedBy="userSkills",cascade = CascadeType.REMOVE)
     @JsonManagedReference(value = "userskills-experienceskill")
     private List<ExperienceSkill> experienceSkills;

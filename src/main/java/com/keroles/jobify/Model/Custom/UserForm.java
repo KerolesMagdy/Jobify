@@ -15,11 +15,11 @@ import javax.validation.constraints.NotNull;
 public class UserForm {
     @NotNull(message = "name not found")
     @NotEmpty(message = "name is empty")
-    private String fullName;
+    private char[] fullName;
     @NotNull(message = "email not found")
     @NotEmpty(message = "email is empty")
-    private String email;
+    private char[] email;
     @NotNull(message = "password not found")
     @NotEmpty(message = "password is empty")
-    private String password;
+    private char[] password;
 }

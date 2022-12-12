@@ -5,6 +5,6 @@ import com.keroles.jobify.Model.Entity.UserRole;
 public interface UserRoleServiceOp {
 
     UserRole saveRole(UserRole userRole);
-    UserRole getByRoleName(String name);
+    UserRole getByRoleName(char[] name);
     long getRoleCount();
 }

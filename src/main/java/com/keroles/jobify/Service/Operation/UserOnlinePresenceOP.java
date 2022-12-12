@@ -5,9 +5,9 @@ import com.keroles.jobify.Model.Entity.UserOnlinePresence;
 
 public interface UserOnlinePresenceOP {
 
-    UserOnlinePresenceDto getByEmail(String email);
-    UserOnlinePresenceDto save(String email);
-    String updateEmail(String oldEmail,String newEmail);
-    String delete(String email);
+    UserOnlinePresenceDto getByEmail(char[] email);
+    UserOnlinePresenceDto save(char[] email);
+    String updateEmail(char[] oldEmail,char[] newEmail);
+    String delete(char[] email);
 
 }

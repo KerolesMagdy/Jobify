@@ -15,7 +15,7 @@ public class UserGeneralInfoController {
     private UserGeneralInfoService userGeneralInfoService;
 
     @RequestMapping(value = "/user/gen-details/{email}",method = RequestMethod.GET)
-    public ResponseEntity<UserGeneralInfo> getUserGeneralInfo(@PathVariable String email){
+    public ResponseEntity<UserGeneralInfo> getUserGeneralInfo(@PathVariable char[] email){
         return ResponseEntity.ok().body(userGeneralInfoService.getInfoCredentialByEmail(email));
     }
 
@@ -30,7 +30,7 @@ public class UserGeneralInfoController {
     }
 
     @RequestMapping(value = "/user/gen-details/{email}",method = RequestMethod.DELETE)
-    public ResponseEntity<Integer> deleteUserGeneralInfo(@PathVariable String email){
+    public ResponseEntity<Integer> deleteUserGeneralInfo(@PathVariable char[] email){
         return ResponseEntity.ok().body(userGeneralInfoService.remove(email));
     }
 

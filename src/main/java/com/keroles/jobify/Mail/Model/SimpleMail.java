@@ -11,9 +11,9 @@ import org.springframework.mail.SimpleMailMessage;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SimpleMail {
-    private String recipient;
+    private char[] recipient;
     private String subject;
-    private String msgBody;
+    private char[] msgBody;
     
     
     

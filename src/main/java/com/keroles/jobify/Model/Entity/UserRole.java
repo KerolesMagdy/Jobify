@@ -19,6 +19,6 @@ public class UserRole {
     @NotNull(message = "you must add an id")
     private Long id;
     @Column(unique = true)
-    private String roleName;
+    private char[] roleName;
 
 }

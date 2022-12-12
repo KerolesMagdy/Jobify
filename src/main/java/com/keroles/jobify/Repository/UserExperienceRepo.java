@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface UserExperienceRepo extends JpaRepository<UserExperience,Long> {
 
-    Optional<UserExperience> findByEmail(String email);
-    int removeByEmail(String email);
+    Optional<UserExperience> findByEmail(char[] email);
+    int removeByEmail(char[] email);
 }

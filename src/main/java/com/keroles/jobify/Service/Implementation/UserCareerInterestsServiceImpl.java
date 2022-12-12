@@ -38,13 +38,13 @@ public class UserCareerInterestsServiceImpl implements UserCareerInterestsServic
     }
 
     @Override
-    public int deleteByEmail(String email) {
+    public int deleteByEmail(char[] email) {
        return userCareerInterestsRepo.removeByEmail(email);
 
     }
 
     @Override
-    public UserCareerInterests getCareerInterestsByEmail(String email) {
+    public UserCareerInterests getCareerInterestsByEmail(char[] email) {
         UserCareerInterests userCareerInterests=  userCareerInterestsRepo.findByEmail(email);
         if(userCareerInterests==null)
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.career_interests.not_found"));

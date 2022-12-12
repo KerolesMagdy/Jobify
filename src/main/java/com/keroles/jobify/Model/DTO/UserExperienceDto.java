@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserExperienceDto {
     private Long id;
-    private String email;
+    private char[] email;
     private int workExperienceYears;
     private List<PreviousExperienceDto> previousExperienceList;
 }

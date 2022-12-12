@@ -22,7 +22,7 @@ public class UserOnlinePresence {
     private Long id;
     @Email
     @Column(unique = true)
-    private String email;
+    private char[] email;
     @OneToMany(fetch=FetchType.LAZY, mappedBy="userOnlinePresence",cascade = CascadeType.REMOVE)
     @JsonManagedReference(value = "useronlinepresence-sociallink")
     private List<SocialLink> socialLinks;

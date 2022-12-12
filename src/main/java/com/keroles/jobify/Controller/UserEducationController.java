@@ -16,19 +16,19 @@ public class UserEducationController {
     private UserEducationService userEducationService;
 
     @RequestMapping(value = "/education/{email}",method = RequestMethod.GET)
-    ResponseEntity<UserEducationDto> getUserEducation(@PathVariable String email){
+    ResponseEntity<UserEducationDto> getUserEducation(@PathVariable char[] email){
         return ResponseEntity.ok().body(userEducationService.getByEmail(email));
     }
     @RequestMapping(value = "/education/update/e",method = RequestMethod.PUT)
-    ResponseEntity<String> updateEducationEmail(@RequestParam String old_email,@RequestParam String new_email){
+    ResponseEntity<String> updateEducationEmail(@RequestParam char[] old_email,@RequestParam char[] new_email){
         return ResponseEntity.ok().body(userEducationService.updateEmail(old_email,new_email));
     }
     @RequestMapping(value = "/education",method = RequestMethod.PUT)
-    ResponseEntity<String> updateEducationCurrentLeve(@RequestParam String email,@RequestParam long level_id){
+    ResponseEntity<String> updateEducationCurrentLeve(@RequestParam char[] email,@RequestParam long level_id){
         return ResponseEntity.ok().body(userEducationService.updateCurrentDegreeLevel(level_id,email));
     }
     @RequestMapping(value = "/education/{email}",method = RequestMethod.DELETE)
-    ResponseEntity<String> deleteEducation(@PathVariable String email){
+    ResponseEntity<String> deleteEducation(@PathVariable char[] email){
         return ResponseEntity.ok().body(userEducationService.deleteUserEducation(email));
     }
 

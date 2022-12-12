@@ -25,7 +25,7 @@ public class UserSkillService implements UserSkillServiceOp {
     @Autowired
     private Environment environment;
     @Override
-    public UserSkillsDto getByEmail(String email) {
+    public UserSkillsDto getByEmail(char[] email) {
         Optional<UserSkills> userSkills = userSkillsRepo.findByEmail(email);
         if (!userSkills.isPresent())
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.skills.not_found"));
@@ -35,7 +35,7 @@ public class UserSkillService implements UserSkillServiceOp {
 
     @Transactional
     @Override
-    public UserSkillsDto save(String email) {
+    public UserSkillsDto save(char[] email) {
         Optional<UserSkills> userSkills = userSkillsRepo.findByEmail(email);
         if (userSkills.isPresent())
             throw new GlobalObjectFoundException(environment.getProperty("validate.message.user.skills.found"));
@@ -43,7 +43,7 @@ public class UserSkillService implements UserSkillServiceOp {
     }
 
     @Override
-    public String updateEmail(String old_email,String new_email) {
+    public String updateEmail(char[] old_email,char[] new_email) {
         if (userSkillsRepo.updateEmail( old_email, new_email)==0)
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.skills.not_found"));
         else
@@ -52,7 +52,7 @@ public class UserSkillService implements UserSkillServiceOp {
 
     @Transactional
     @Override
-    public String delete(String email) {
+    public String delete(char[] email) {
         Optional<UserSkills> retrievedUserSkills = userSkillsRepo.findByEmail(email);
         if (!retrievedUserSkills.isPresent())
             throw new GlobalObjectNotFoundException(environment.getProperty("validate.message.user.skills.not_found"));

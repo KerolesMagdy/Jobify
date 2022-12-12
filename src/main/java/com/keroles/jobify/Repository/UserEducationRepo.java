@@ -13,14 +13,14 @@ import java.util.Optional;
 @Repository
 public interface UserEducationRepo extends JpaRepository<UserEducation,Long> {
 
-    Optional<UserEducation> findByEmail(String email);
+    Optional<UserEducation> findByEmail(char[] email);
     @Transactional
     @Modifying
     @Query("update UserEducation u set u.email=:new_email where u.email=:old_email")
-    int updateEmail(String old_email,String new_email);
+    int updateEmail(char[] old_email,char[] new_email);
 
     @Transactional
     @Modifying
     @Query("update UserEducation u set u.currentDegreeLevel=:currentLevel where u.email=:email")
-    int updateCurrentLevel(DegreeLevel currentLevel, String email);
+    int updateCurrentLevel(DegreeLevel currentLevel, char[] email);
 }

@@ -15,7 +15,7 @@ public class UserCareerInterestsController {
     private UserCareerInterestsServiceImpl userCareerInterestsService;
 
     @RequestMapping(value = "/career-interests/{email}",method = RequestMethod.GET)
-    public ResponseEntity<UserCareerInterests> getCareerInterestsByEmail(@PathVariable String email){
+    public ResponseEntity<UserCareerInterests> getCareerInterestsByEmail(@PathVariable char[] email){
         return ResponseEntity.ok().body(userCareerInterestsService.getCareerInterestsByEmail(email));
     }
 

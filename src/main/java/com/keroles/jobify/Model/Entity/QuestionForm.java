@@ -17,7 +17,7 @@ public class QuestionForm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "questionForm")
+    @OneToMany(mappedBy = "questionForm",cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JsonManagedReference(value = "QuestionForm-question")
     private List <Question> questions;
 

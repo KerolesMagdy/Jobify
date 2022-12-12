@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserOtpRepo extends JpaRepository<UserOtp,Long> {
 
-    UserOtp findByEmail(String Email);
+    UserOtp findByEmail(char[] email);
 }

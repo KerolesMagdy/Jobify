@@ -28,7 +28,7 @@ public class UserOtp {
     @Column(unique = true)
     @NotNull(message = "email not found")
     @NotEmpty(message = "email is empty")
-    private String email;
+    private char[] email;
     private int otp;
     private Date expired;
 

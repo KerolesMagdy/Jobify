@@ -14,22 +14,22 @@ public class UserOnlinePresenceController {
     private UserOnlinePresenceService userOnlinePresenceService;
 
     @RequestMapping(value = "/user/online-presence/{email}",method = RequestMethod.GET)
-    ResponseEntity<UserOnlinePresenceDto> getUserOnlinePresence(@PathVariable String email){
+    ResponseEntity<UserOnlinePresenceDto> getUserOnlinePresence(@PathVariable char[] email){
         return ResponseEntity.ok().body(userOnlinePresenceService.getByEmail(email));
     }
 
     @RequestMapping(value = "/user/online-presence/{email}",method = RequestMethod.POST)
-    ResponseEntity<UserOnlinePresenceDto> saveUserOnlinePresence(@PathVariable String email){
+    ResponseEntity<UserOnlinePresenceDto> saveUserOnlinePresence(@PathVariable char[] email){
         return ResponseEntity.ok().body(userOnlinePresenceService.save(email));
     }
 
     @RequestMapping(value = "/user/online-presence",method = RequestMethod.PUT)
-    ResponseEntity<String> updateUserOnlinePresence(@RequestParam String old_email,@RequestParam String new_email){
+    ResponseEntity<String> updateUserOnlinePresence(@RequestParam char[] old_email,@RequestParam char[] new_email){
         return ResponseEntity.ok().body(userOnlinePresenceService.updateEmail(old_email,new_email));
     }
 
     @RequestMapping(value = "/user/online-presence/{email}",method = RequestMethod.DELETE)
-    ResponseEntity<String> deleteUserOnlinePresence(@PathVariable String email){
+    ResponseEntity<String> deleteUserOnlinePresence(@PathVariable char[] email){
         return ResponseEntity.ok().body(userOnlinePresenceService.delete(email));
     }
 }

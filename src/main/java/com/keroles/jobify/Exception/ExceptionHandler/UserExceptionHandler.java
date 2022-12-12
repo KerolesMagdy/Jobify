@@ -9,6 +9,7 @@ import com.keroles.jobify.Exception.ExceptionResponseModel.ExceptionArgsResponse
 import com.keroles.jobify.Exception.ExceptionUtil;
 import com.keroles.jobify.Exception.Exceptions.User.UserOpNotAuthException;
 import com.keroles.jobify.Exception.Exceptions.User.UserDuplicateException;
+import com.keroles.jobify.Exception.Exceptions.User.UserRegistrationFailedException;
 import com.keroles.jobify.Exception.Exceptions.User.UserRoleDuplicateException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,12 +31,12 @@ import java.util.List;
 @RestControllerAdvice
 public class UserExceptionHandler {
 
+
     private final ExceptionUtil exceptionUtil;
 
     public UserExceptionHandler(ExceptionUtil exceptionUtil) {
         this.exceptionUtil = exceptionUtil;
     }
-
     @ExceptionHandler(UserDuplicateException.class)
     public final ResponseEntity<Object> handleUserDuplicateException(UserDuplicateException ex, WebRequest request) {
         return exceptionUtil.prepareCustomExceptionResponse(ex,HttpStatus.INTERNAL_SERVER_ERROR, "validate.message.user.duplicate", request);
@@ -48,6 +49,11 @@ public class UserExceptionHandler {
     @ExceptionHandler(UserOpNotAuthException.class)
     public final ResponseEntity<Object> handleUserOpNotAuthException(UserOpNotAuthException ex, WebRequest request) {
         return exceptionUtil.prepareCustomExceptionResponse(ex,HttpStatus.FORBIDDEN, "validate.message.user.auth.op.no_auth", request);
+    }
+
+    @ExceptionHandler(UserRegistrationFailedException.class)
+    public final ResponseEntity<Object> handleUserRegistrationFailedException(UserRegistrationFailedException ex, WebRequest request) {
+        return exceptionUtil.prepareCustomExceptionResponse(ex,HttpStatus.FORBIDDEN, "validate.message.user.register.failed", request);
     }
     
 }

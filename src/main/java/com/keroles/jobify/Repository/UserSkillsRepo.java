@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface UserSkillsRepo extends JpaRepository<UserSkills,Long> {
-    Optional<UserSkills> findByEmail(String email);
+    Optional<UserSkills> findByEmail(char[] email);
     @Transactional
     @Modifying
     @Query("update UserSkills u set u.email=:new_email where u.email=:old_email")
-    int updateEmail(String old_email,String new_email);
+    int updateEmail(char[] old_email,char[] new_email);
 
 }

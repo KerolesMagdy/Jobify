@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserOnlinePresenceDto {
     private Long id;
-    private String email;
+    private char[] email;
     private List<SocialLinkDto> socialLinks;
 
 }

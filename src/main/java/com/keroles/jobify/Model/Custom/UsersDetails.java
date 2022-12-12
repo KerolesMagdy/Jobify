@@ -1,5 +1,6 @@
-package com.keroles.jobify.Model;
+package com.keroles.jobify.Model.Custom;
 
+import com.keroles.jobify.Model.Entity.Employer;
 import com.keroles.jobify.Model.Entity.Users;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,8 +14,10 @@ public class UsersDetails implements UserDetails {
 
     @Getter
     private Users users;
-    private String username;
-    private String password;
+    @Getter
+    private Employer employer;
+    private char[] username;
+    private char[] password;
     private boolean enable;
     private boolean expired;
     private boolean locked;
@@ -22,13 +25,24 @@ public class UsersDetails implements UserDetails {
 
     public UsersDetails(Users users) {
         if (users.getUserRoles()!=null)
-            users.getUserRoles().forEach(userRole -> authorities.add(new SimpleGrantedAuthority(userRole.getRoleName())));
+            users.getUserRoles().forEach(userRole -> authorities.add(new SimpleGrantedAuthority(String.valueOf(userRole.getRoleName()))));
         this.password=users.getPassword();
         this.username=users.getEmail();
         this.enable=users.isEnabled();
         this.expired=users.isExpired();
         this.locked=users.isLocked();
         this.users=users;
+    }
+
+    public UsersDetails(Employer employer) {
+        if (employer.getUserRoles()!=null)
+            employer.getUserRoles().forEach(userRole -> authorities.add(new SimpleGrantedAuthority(String.valueOf(userRole.getRoleName()))));
+        this.password=employer.getPassword();
+        this.username=employer.getEmail();
+        this.enable=employer.isEnabled();
+        this.expired=employer.isExpired();
+        this.locked=employer.isLocked();
+        this.employer=employer;
     }
 
     @Override
@@ -38,12 +52,12 @@ public class UsersDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return String.valueOf(password);
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return String.valueOf(username);
     }
 
     @Override
